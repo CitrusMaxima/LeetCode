@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 class Solution {
 
@@ -420,6 +417,51 @@ class Solution {
         result[1] = left;
 
         return result;
+    }
+
+    //组合总和
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+
+        List<List<Integer>> list = new ArrayList<List<Integer>>();
+        Arrays.sort(candidates);
+
+        if(candidates.length == 0 || candidates[0] > target)
+            return list;
+
+        int len = 0;
+        boolean isAdd = false;
+        for(int i = 0; i < candidates.length;i++){
+            if(candidates[i] == target){
+                if(!isAdd){
+                    List<Integer> al = new ArrayList<Integer>();
+                    al.add(target);
+                    list.add(al);
+                    isAdd = true;
+                }
+            }else if(candidates[i] < target){
+                candidates[len++] = candidates[i];
+            }
+        }
+
+        if(candidates[0] > target)
+            return list;
+
+        for(int i = 0; i < len; i++){
+            int[] b = Arrays.copyOfRange(candidates, i, len);
+            if(candidates[i] > target)
+                break;
+
+            List<List<Integer>> newList = new ArrayList<List<Integer>>();
+            newList = combinationSum(b,target-candidates[i]);
+            if(newList.size() > 0){
+                for(int j = 0; j < newList.size();j++){
+                    newList.get(j).add(candidates[i]);
+                    Collections.sort(newList.get(j));
+                    list.add(newList.get(j));
+                }
+            }
+        }
+        return list;
     }
 }
 
