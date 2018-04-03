@@ -5,7 +5,9 @@ public class Main {
     public static void main(String[] args) {
 
         Solution solution = new Solution();
-        int[] nums = new int[]{-3,-2,-5,3,-4};
-        System.out.println(solution.threeSumClosest(nums,-1));
+        int[] nums = new int[]{5, 7, 7, 8, 8, 10};
+        int[] result = solution.searchRange(nums,8);
+        System.out.println(result[0]);
+        System.out.println(result[1]);
     }
 }
