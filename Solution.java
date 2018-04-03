@@ -3,6 +3,7 @@ package leetcode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 class Solution {
 
@@ -300,6 +301,50 @@ class Solution {
             i++;
         }
         return strs[0];
+    }
+
+    //有效的括号
+    public boolean isValid(String s) {
+
+        if(s == null || s.length() == 0 || s.length() % 2 != 0){
+            return false;
+        }
+
+        Stack<Character> stack=new Stack<Character>();
+        boolean flag = true;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(' || s.charAt(i) == '[' || s.charAt(i) == '{') {
+                stack.push(s.charAt(i));
+            } else if (s.charAt(i) == ')') {
+                if (!stack.empty() && stack.peek() == '(') {
+                    stack.pop();
+                } else {
+                    flag = false;
+                    break;
+                }
+            } else if (s.charAt(i) == ']') {
+                if (!stack.empty() && stack.peek() == '[') {
+                    stack.pop();
+                } else {
+                    flag = false;
+                    break;
+                }
+            } else if (s.charAt(i) == '}') {
+                if (!stack.empty() && stack.peek() == '{') {
+                    stack.pop();
+                } else {
+                    flag = false;
+                    break;
+                }
+            }
+        }
+
+        if (!stack.empty()){
+            flag = false;
+        }
+
+        return flag;
     }
 }
 
