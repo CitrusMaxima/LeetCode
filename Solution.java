@@ -401,16 +401,23 @@ class Solution {
         if (nums[right] != target)
             return result;
         result[0] = right;
+        result[1] = right;
         right = nums.length-1;
+        //left = 0;
 
-        while (left < right) {
-            mid = (left + right) / 2;
-            if (nums[mid] <= target)
-                left = mid + 1;
+        while (left <= right) {
+            mid = ((left + right) / 2) + ((left + right) % 2);
+            if (left == mid)
+                break;
+            if (nums[mid] > target) {
+                right = mid - 1;
+            }
             else
-                right = mid;
+                left = mid;
         }
-        result[1] = left - 1;
+        if (nums[left] != target)
+            return result;
+        result[1] = left;
 
         return result;
     }
