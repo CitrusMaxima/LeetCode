@@ -127,11 +127,39 @@ class Solution {
         return result;
     }
 
-    public static void main(String[] args) {
+    //无重复字符的最长子串
+    public int lengthOfLongestSubstring(String s) {
 
-        Solution solution = new Solution();
-        int[] nums = new int[]{-3,-2,-5,3,-4};
-        System.out.println(solution.threeSumClosest(nums,-1));
+        String temp = "";
+        List<Integer> result = new ArrayList<Integer>();
+        result.add(0);
+        int j = 0;
+        int max = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (temp.contains(String.valueOf(s.charAt(i)))) {
+                if (result.get(j) <= temp.length()) {
+                    result.add(temp.length());
+                    j++;
+                }
+                if (temp.length() == 1)
+                    temp = String.valueOf(s.charAt(i));
+                else {
+                    temp = temp.substring(1,temp.length());
+                    i--;
+                }
+            } else {
+                temp += String.valueOf(s.charAt(i));
+                result.set(j,temp.length());
+            }
+        }
+
+        for (int k = 0; k < result.size(); k++) {
+            if (max < result.get(k))
+                max = result.get(k);
+        }
+
+        return max;
     }
 
 }
