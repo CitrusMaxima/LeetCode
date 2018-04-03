@@ -189,7 +189,26 @@ class Solution {
         }
     }
 
+    //颠倒整数
+    public int reverse(int x) {
 
+        boolean isNegative = false;
+        String str = String.valueOf(x);
+        if (x < 0) {
+            isNegative = true;
+            str = str.substring(1, str.length());
+        }
+
+
+        StringBuffer sb = new StringBuffer(str);
+        String result = sb.reverse().toString();
+
+        if (Long.parseLong(result) > Integer.MAX_VALUE) {
+            result = "0";
+        }
+
+        return (isNegative == false ? Integer.parseInt(result) : -Integer.parseInt(result));
+    }
 
 }
 
