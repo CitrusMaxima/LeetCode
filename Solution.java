@@ -375,5 +375,44 @@ class Solution {
         }
         return Arrays.stream(nums).max().getAsInt();
     }
+
+    //搜索范围
+    public int[] searchRange(int[] nums, int target) {
+
+        int[] result = new int[]{-1,-1};
+        if (nums == null || nums.length == 0)
+            return result;
+
+        int left = 0;
+        int right = nums.length-1;
+        int mid;
+
+        if (nums[left] > target || nums[right] < target)
+            return result;
+
+        while (left < right) {
+            mid = (left + right) / 2;
+            if (nums[mid] < target)
+                left = mid + 1;
+            else
+                right = mid;
+        }
+
+        if (nums[right] != target)
+            return result;
+        result[0] = right;
+        right = nums.length-1;
+
+        while (left < right) {
+            mid = (left + right) / 2;
+            if (nums[mid] <= target)
+                left = mid + 1;
+            else
+                right = mid;
+        }
+        result[1] = left - 1;
+
+        return result;
+    }
 }
 
