@@ -210,5 +210,22 @@ class Solution {
         return (isNegative == false ? Integer.parseInt(result) : -Integer.parseInt(result));
     }
 
+    //回文数
+    public boolean isPalindrome(int x) {
+
+        String str = String.valueOf(x);
+        if (x < 0) {
+            return false;
+        }
+
+        int len = str.length();
+        for (int i = 0; i < len; i++) {
+            if (str.charAt(i) != str.charAt(len-i-1)){
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
 
