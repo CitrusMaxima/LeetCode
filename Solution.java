@@ -478,6 +478,39 @@ class Solution {
         }
     }
 
-    
+    //删除链表的倒数第N个节点
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+
+        ListNode p1, p2, pre;
+        if ( head == null || n <= 0 ) {
+            return null;
+        }
+
+        p1 = head;
+        p2 = head;
+        pre = head;
+
+        for ( int i = 0; i < n-1; i++ ) {
+            if ( p1.next != null ) {
+                p1 = p1.next;
+            } else {
+                return null;
+            }
+        }
+
+        while ( p1.next != null ) {
+            p1 = p1.next;
+            pre = p2;
+            p2 = p2.next;
+        }
+
+        if ( p2 == head ) {
+            head = head.next;
+        } else {
+            pre.next = pre.next.next;
+        }
+
+        return head;
+    }
 }
 
