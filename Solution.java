@@ -512,5 +512,37 @@ class Solution {
 
         return head;
     }
+
+    //合并两个有序链表
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode head=new ListNode(0);
+        ListNode p=head;
+        int val1,val2;
+        while(l1!=null || l2!=null){
+            val1=Integer.MAX_VALUE;
+            val2=Integer.MAX_VALUE;
+            if(l1!=null){
+                val1=l1.val;
+            } else{
+                p.next=l2;
+                break;
+            }
+            if(l2!=null){
+                val2=l2.val;
+            } else{
+                p.next=l1;
+                break;
+            }
+            if(val1<val2){
+                p.next=l1;
+                l1=l1.next;
+            } else{
+                p.next=l2;
+                l2=l2.next;
+            }
+            p=p.next;
+        }
+        return head.next;
+    }
 }
 
