@@ -563,5 +563,29 @@ class Solution {
 
         return right - 1;
     }
+
+    //交换相邻结点
+    public ListNode swapPairs(ListNode head) {
+
+        if(head == null)
+            return head;
+
+        ListNode cur = head;
+        ListNode prev = cur;  // 连接每对节点
+
+        if(cur.next != null)
+            head = cur.next;
+
+        while(cur != null && cur.next != null){
+            prev.next = cur.next;
+            ListNode next = cur.next.next;  // next用来保存下一对节点的开始节点
+            cur.next.next = cur;
+            cur.next = next;
+            prev = cur;  // prev指向每一对反转之后节点的第二个节点
+            cur = next;  // cur指向每一对节点的第一个节点
+        }
+
+        return head;
+    }
 }
 

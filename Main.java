@@ -5,9 +5,18 @@ public class Main {
     public static void main(String[] args) {
 
         Solution solution = new Solution();
-        int[] nums = new int[]{7,7,7,8,8,9};
-        int[] result = solution.searchRange(nums,8);
-        System.out.println(result[0]);
-        System.out.println(result[1]);
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+
+        head = solution.swapPairs(head);
+
+        System.out.println(head.val);
+        System.out.println(head.next.val);
+        System.out.println(head.next.next.val);
+        System.out.println(head.next.next.next.val);
+        System.out.println(head.next.next.next.next.val);
     }
 }
