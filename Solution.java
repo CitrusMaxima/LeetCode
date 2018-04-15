@@ -698,5 +698,65 @@ class Solution {
         nums[i] = nums[j];
         nums[j] = temp;
     }
+
+    //组合总和 II
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+
+        List<List<Integer>> list = new ArrayList<List<Integer>>();
+        List<List<Integer>> newList = new ArrayList<List<Integer>>();
+        list = combinationSum1(candidates,target);
+        Set<List<Integer>> set = new HashSet<List<Integer>>();//去除重复
+        for(int i = 0; i < list.size();i++){
+            if(set.add(list.get(i))){//没有重复
+                newList.add(list.get(i));//添加新的列表
+            }
+        }
+        return newList;
+    }
+
+    public List<List<Integer>> combinationSum1(int[] candidates, int target) {
+        List<List<Integer>> list = new ArrayList<List<Integer>>();
+        Arrays.sort(candidates);//数组排序
+        //各种特殊情况
+        if(candidates.length == 0 || candidates[0] > target)
+            return list;
+
+        int len = 0;
+        boolean isAdd = false;//控制与t相等的数只添加一次
+        for(int i = 0; i< candidates.length;i++){
+            if(candidates[i] == target){
+                if(!isAdd){//如果未添加
+                    List<Integer> al = new ArrayList<Integer>();
+                    al.add(target);
+                    list.add(al);
+                    isAdd = true;//标记已添加
+                }
+            }else if(candidates[i] < target){//只要比target小的值，大的值肯定不满足，排除
+                candidates[len++] = candidates[i];//新数组
+            }
+        }
+        //只存在a[0] < target 或 a[0] > target
+        if(candidates[0] > target)//肯定已没有符合要求的组合
+            return list;
+        //a[0] < target
+
+        for(int i = 0; i < len; i++){//循环搜索符合要求的数字组合
+            int[] b = Arrays.copyOfRange(candidates, i+1, len);//不含>=t数据的新数组
+            if(candidates[i] > target)//如果a[i]，肯定以后的数据已不符合，返回
+                break;
+            //相等于已经有了一个值a[0]了
+            List<List<Integer>> newList = new ArrayList<List<Integer>>();
+            if(i < len -1)
+                newList = combinationSum1(b,target-candidates[i]);
+            if(newList.size() > 0){//里面有符合要求的数据
+                for(int j = 0; j < newList.size();j++){
+                    newList.get(j).add(candidates[i]);//新返回的各个值添加a[0]
+                    Collections.sort(newList.get(j));//排序
+                    list.add(newList.get(j));//最终添加
+                }
+            }
+        }
+        return list;
+    }
 }
 
