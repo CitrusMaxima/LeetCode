@@ -1,14 +1,12 @@
 package leetcode;
 
-import java.util.List;
-
 public class Main {
 
     public static void main(String[] args) {
 
         Solution solution = new Solution();
-        int[] x = new int[]{10,1,2,7,6,1,5};
-        List<List<Integer>> result = solution.combinationSum2(x,8);
+        int[] x = new int[]{3,2,1,0,4};
+        boolean result = solution.canJump(x);
         System.out.println(result);
     }
 }
