@@ -770,5 +770,31 @@ class Solution {
 
         return reach >= nums.length-1;
     }
+
+    //合并区间
+    public List<Interval> merge(List<Interval> intervals) {
+
+        List<Interval> list = new ArrayList<Interval>();
+        int n = intervals.size();
+        int[] starts = new int[n];
+        int[] ends = new int[n];
+
+        for (int i=0; i<n; i++) {
+            starts[i] = intervals.get(i).start;
+            ends[i] = intervals.get(i).end;
+        }
+
+        Arrays.sort(starts);
+        Arrays.sort(ends);
+
+        for (int i=0, j=0; i<n; i++) {
+            if (i==n-1 || starts[i+1]>ends[i]) {
+                list.add(new Interval(starts[j], ends[i]));
+                j = i + 1;
+            }
+        }
+
+        return list;
+    }
 }
 
