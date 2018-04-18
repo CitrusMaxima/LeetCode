@@ -931,7 +931,6 @@ class Solution {
         high = n - 1;
         int temp = low > 0 ? low - 1 : 0;
         low = 0;
-        middle = 0;
         while (low <= high) {
             middle = (low + high) / 2;
             if (target < matrix[temp][middle]) {
