@@ -905,4 +905,43 @@ class Solution {
         return result[m-1][n-1];
     }
 
+    //搜索二维矩阵
+    public boolean searchMatrix(int[][] matrix, int target) {
+
+        int low = 0, middle = 0;
+
+        int m = matrix.length;
+        if (m == 0) return false;
+
+        int n = matrix[0].length;
+        if (n == 0) return false;
+
+        int high = m - 1;
+        while (low <= high) {
+            middle = (low + high) / 2;
+            if (target < matrix[middle][0]) {
+                high = middle - 1;
+            } else if (target > matrix[middle][0]) {
+                low = middle + 1;
+            } else {
+                return true;
+            }
+        }
+
+        high = n - 1;
+        int temp = low > 0 ? low - 1 : 0;
+        low = 0;
+        middle = 0;
+        while (low <= high) {
+            middle = (low + high) / 2;
+            if (target < matrix[temp][middle]) {
+                high = middle - 1;
+            } else if (target > matrix[temp][middle]) {
+                low = middle + 1;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
 }
