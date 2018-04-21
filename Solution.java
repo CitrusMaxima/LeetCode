@@ -1002,4 +1002,36 @@ class Solution {
 
         return lessHead.next;
     }
+
+    //反转链表 II
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        if(head == null || head.next == null)
+            return head;
+
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        head = dummy;
+
+        for(int i = 1 ; i < m; i++){
+            head = head.next;
+        }
+
+        ListNode headOfSubList = head.next;
+        ListNode nodeBeforeHead = head;
+        ListNode nextNode = head.next.next;
+        ListNode currNode = head.next;
+
+        for(int i = m; i < n ; i++){
+            ListNode tmp = nextNode.next;
+            nextNode.next = currNode;
+            currNode = nextNode;
+            nextNode = tmp;
+        }
+
+        headOfSubList.next = nextNode;
+        nodeBeforeHead.next = currNode;
+        
+        return dummy.next;
+    }
+
 }
