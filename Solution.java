@@ -1030,8 +1030,26 @@ class Solution {
 
         headOfSubList.next = nextNode;
         nodeBeforeHead.next = currNode;
-        
+
         return dummy.next;
+    }
+
+    //二叉树的中序遍历
+    public List<Integer> inorderTraversal(TreeNode root) {
+
+        List<Integer> list = new ArrayList<Integer>();
+        if (root == null)
+            return list;
+
+        if (root.left != null) {
+            list.addAll(inorderTraversal(root.left));
+        }
+        list.add(root.val);
+        if (root.right != null) {
+            list.addAll(inorderTraversal(root.right));
+        }
+
+        return list;
     }
 
 }
