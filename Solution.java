@@ -47,14 +47,17 @@ class Solution {
     //三数之和
     public List<List<Integer>> threeSum(int[] nums) {
 
-        Arrays.sort(nums);
         List<List<Integer>> result = new ArrayList<List<Integer>>();
+
+        if (nums == null) return result;
+
+        Arrays.sort(nums);
 
         int temp = 0;
         int left;
         int right = nums.length-1;
 
-        if ((nums == null || nums.length == 0 || nums.length < 3 || nums[temp] > 0 || nums[right] < 0))
+        if (nums.length == 0 || nums.length < 3 || nums[temp] > 0 || nums[right] < 0)
             return result;
 
         for (; temp < nums.length-2 && nums[temp] <= 0;) {
@@ -388,7 +391,7 @@ class Solution {
             return result;
 
         while (left < right) {
-            mid = (left + right) / 2;
+            mid = (left + right) >>> 1;
             if (nums[mid] < target)
                 left = mid + 1;
             else
@@ -451,8 +454,7 @@ class Solution {
             if(candidates[i] > target)
                 break;
 
-            List<List<Integer>> newList = new ArrayList<List<Integer>>();
-            newList = combinationSum(b,target-candidates[i]);
+            List<List<Integer>> newList = combinationSum(b,target-candidates[i]);
             if(newList.size() > 0){
                 for(int j = 0; j < newList.size();j++){
                     newList.get(j).add(candidates[i]);
@@ -666,8 +668,7 @@ class Solution {
         // 最终返回的结果集
         List<List<Integer>> res = new ArrayList<List<Integer>>();
 
-        int len = nums.length;
-        if (len==0||nums==null)  return res;
+        if (nums == null || nums.length == 0)  return res;
 
         // 采用前后元素交换的办法，dfs解题
         exchange(nums, 0, res);
@@ -702,9 +703,8 @@ class Solution {
     //组合总和 II
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
 
-        List<List<Integer>> list = new ArrayList<List<Integer>>();
+        List<List<Integer>> list = combinationSum1(candidates,target);
         List<List<Integer>> newList = new ArrayList<List<Integer>>();
-        list = combinationSum1(candidates,target);
         Set<List<Integer>> set = new HashSet<List<Integer>>();//去除重复
         for(int i = 0; i < list.size();i++){
             if(set.add(list.get(i))){//没有重复
@@ -918,7 +918,7 @@ class Solution {
 
         int high = m - 1;
         while (low <= high) {
-            middle = (low + high) / 2;
+            middle = (low + high) >>> 1;
             if (target < matrix[middle][0]) {
                 high = middle - 1;
             } else if (target > matrix[middle][0]) {
@@ -932,7 +932,7 @@ class Solution {
         int temp = low > 0 ? low - 1 : 0;
         low = 0;
         while (low <= high) {
-            middle = (low + high) / 2;
+            middle = (low + high) >>> 1;
             if (target < matrix[temp][middle]) {
                 high = middle - 1;
             } else if (target > matrix[temp][middle]) {
