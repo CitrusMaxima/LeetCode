@@ -37,10 +37,6 @@ class Solution {
             if (l2 != null) l2 = l2.next;
         }
 
-        if(carry>0){
-            curr.next=new ListNode(carry);
-        }
-
         return dummyHead.next;
     }
 
